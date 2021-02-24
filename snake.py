@@ -1,16 +1,17 @@
 from turtle import Turtle
 STARTING_POSITION = (0, 0)
 STARTING_LENGTH = 3
-MOVE_DISTANCE = 20
+MOVE_DISTANCE = 10
 UP = 90
 RIGHT = 0
 DOWN = 270
 LEFT = 180
 
 
-class Snake:
+class Snake(Turtle):
 
     def __init__(self):
+        super().__init__()
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
