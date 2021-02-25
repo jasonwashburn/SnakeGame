@@ -23,6 +23,13 @@ class Snake(Turtle):
             piece.penup()
             piece.setx(STARTING_POSITION[0] - (num * 20))
 
+    def grow(self):
+        new_segment = Turtle(shape='square')
+        previous_segment = self.segments[-1:][0]
+        print(type(previous_segment))
+        new_segment.goto(previous_segment.position())
+        self.segments.append(new_segment)
+
     def move(self):
         for seg_num in range(len(self.segments) - 1, 0, -1):
             # Note the position of the segment in front of the current piece,
