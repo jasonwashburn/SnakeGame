@@ -21,10 +21,10 @@ scoreboard = Scoreboard()
 
 # Start listening for key presses
 screen.listen()
-screen.onkey(snake.up, 'Up')
-screen.onkey(snake.down, 'Down')
-screen.onkey(snake.right, 'Right')
-screen.onkey(snake.left, 'Left')
+screen.onkey(snake.go_up, 'Up')
+screen.onkey(snake.go_down, 'Down')
+screen.onkey(snake.go_right, 'Right')
+screen.onkey(snake.go_left, 'Left')
 
 game_is_on = True
 
@@ -39,7 +39,7 @@ while game_is_on:
     if snake.head.distance(food) < 15:
         scoreboard.score += 1
         scoreboard.update_score()
-        snake.grow()
+        snake.extend()
         food.refresh()
 
     if (snake.head.xcor() > 280) or (snake.head.xcor() < -280):
@@ -51,6 +51,11 @@ while game_is_on:
         scoreboard.game_over()
         game_is_on = False
 
+    # Detect collision with tail
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 10:
+            game_is_on = False
+            scoreboard.game_over()
 
 
 
